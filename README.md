@@ -61,13 +61,13 @@
 ###
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=edborja&show_icons=true&theme=tokyonight" height="180" alt="github stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=edborja&layout=compact&theme=tokyonight" height="180" alt="top langs" />
+  <img src="https://github-profile-trophy.vercel.app/?username=edborja&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15" alt="github trophies" />
 </div>
 
 <br>
 
 <div align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=edborja&theme=tokyonight" height="180" alt="github summary card" />
   <img src="https://streak-stats.demolab.com?user=edborja&locale=en&mode=daily&theme=tokyonight&hide_border=false&border_radius=5&order=3" height="180" alt="streak graph"  />
 </div>
 
