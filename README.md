@@ -61,14 +61,14 @@
 ###
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=edborja&show_icons=true&theme=dark" height="180" alt="github stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=edborja&layout=compact&theme=dark" height="180" alt="top langs" />
+  <img src="https://github-readme-stats.vercel.app/api?username=edborja&show_icons=true&theme=tokyonight" height="180" alt="github stats" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=edborja&layout=compact&theme=tokyonight" height="180" alt="top langs" />
 </div>
 
 <br>
 
 <div align="center">
-  <img src="https://streak-stats.demolab.com?user=edborja&locale=en&mode=daily&theme=dark&hide_border=false&border_radius=5&order=3" height="180" alt="streak graph"  />
+  <img src="https://streak-stats.demolab.com?user=edborja&locale=en&mode=daily&theme=tokyonight&hide_border=false&border_radius=5&order=3" height="180" alt="streak graph"  />
 </div>
 
 ###
