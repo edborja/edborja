@@ -9,14 +9,14 @@
       set -e
       rm -rf dist
       mkdir -p dist
-      found=false
       # find SVG files (limit depth) and copy into dist
-      find . -maxdepth 6 -type f -iname '*.svg' -print0 | while IFS= read -r -d '' f; do
+      found_count=0
+      find . -maxdepth 6 -type f -iname '*.svg' -print0 2>/dev/null | while IFS= read -r -d '' f; do
         echo "Found SVG: $f"
-        cp -f "$f" dist/ || true
-        found=true
+        cp -f "$f" dist/ 2>/dev/null
+        ((found_count++))
       done
-      if [ -n "$(ls -A dist 2>/dev/null)" ]; then
+      if [ -d dist ] && [ "$(find dist -type f | wc -l)" -gt 0 ]; then
         echo "has_svgs=true" >> $GITHUB_OUTPUT
       else
         echo "has_svgs=false" >> $GITHUB_OUTPUT
@@ -33,9 +33,7 @@
 
   - name: Skip publish if no svgs found
     if: steps.collect.outputs.has_svgs != 'true'
-    run: |
-      echo "No SVGs found; skipping publish step."
-      exit 0
+    run: echo "No SVGs found; skipping publish step."
 
   - name: Push pacman-contribution-graph.svg to the output branch
     if: steps.collect.outputs.has_svgs == 'true'
