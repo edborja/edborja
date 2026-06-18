@@ -6,16 +6,15 @@
   - name: Ensure dist dir and collect generated svgs
     run: |
       set -e
-      # create dist if missing
       mkdir -p dist
-      # find any svg files generated anywhere in the workspace and copy them into dist
-      find . -type f -iname '*.svg' -maxdepth 4 -print -exec cp -f {} dist/ \; || true
+      # find svg files (limit depth to avoid huge searches) and copy into dist
+      find . -maxdepth 6 -type f -iname '*.svg' -print -exec cp -f {} dist/ \; || true
       echo "Copied any found SVGs into dist"
 
   - name: List generated files (debug)
     run: |
       echo "Repo root listing:"
-      ls -la .
+      ls -la
       echo "dist listing:"
       ls -la dist || true
       echo "Files copied into dist (names):"
