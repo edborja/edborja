@@ -1,44 +1,57 @@
-  - name: Generate pacman-contribution-graph.svg
-    uses: abozanona/pacman-contribution-graph@main
-    with:
-      github_user_name: ${{ github.repository_owner }}
+name: Pacman Contribution Graph
 
-  - id: collect
-    name: Ensure dist dir and collect generated svgs
-    run: |
-      set -e
-      rm -rf dist
-      mkdir -p dist
-      # find SVG files (limit depth) and copy into dist
-      found_count=0
-      find . -maxdepth 6 -type f -iname '*.svg' -print0 2>/dev/null | while IFS= read -r -d '' f; do
-        echo "Found SVG: $f"
-        cp -f "$f" dist/ 2>/dev/null
-        ((found_count++))
-      done
-      if [ -d dist ] && [ "$(find dist -type f | wc -l)" -gt 0 ]; then
-        echo "has_svgs=true" >> $GITHUB_OUTPUT
-      else
-        echo "has_svgs=false" >> $GITHUB_OUTPUT
-      fi
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
-  - name: List generated files (debug)
-    run: |
-      echo "Repo root listing:"
-      ls -la
-      echo "dist listing:"
-      ls -la dist/ 2>/dev/null || echo "dist directory is empty"
-      echo "SVG files in dist:"
-      find dist -type f -name '*.svg' 2>/dev/null || echo "No SVG files found"
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - name: Skip publish if no svgs found
-    if: steps.collect.outputs.has_svgs != 'true'
-    run: echo "No SVGs found; skipping publish step."
+      - name: Generate pacman-contribution-graph.svg
+        uses: abozanona/pacman-contribution-graph@main
+        with:
+          github_user_name: ${{ github.repository_owner }}
 
-  - name: Push pacman-contribution-graph.svg to the output branch
-    if: steps.collect.outputs.has_svgs == 'true'
-    uses: crazy-max/ghaction-github-pages@v3.1.0
-    with:
-      target_branch: output
-      build_dir: dist
-      github_token: ${{ secrets.GITHUB_TOKEN }}
+      - id: collect
+        name: Ensure dist dir and collect generated svgs
+        run: |
+          set -e
+          rm -rf dist
+          mkdir -p dist
+          # find SVG files (limit depth) and copy into dist
+          found_count=0
+          find . -maxdepth 6 -type f -iname '*.svg' -print0 2>/dev/null | while IFS= read -r -d '' f; do
+            echo "Found SVG: $f"
+            cp -f "$f" dist/ 2>/dev/null && ((found_count++))
+          done
+          if [ -d dist ] && [ "$(find dist -type f | wc -l)" -gt 0 ]; then
+            echo "has_svgs=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_svgs=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: List generated files (debug)
+        run: |
+          echo "Repo root listing:"
+          ls -la
+          echo "dist listing:"
+          ls -la dist/ 2>/dev/null || echo "dist directory is empty"
+          echo "SVG files in dist:"
+          find dist -type f -name '*.svg' 2>/dev/null || echo "No SVG files found"
+
+      - name: Skip publish if no svgs found
+        if: steps.collect.outputs.has_svgs != 'true'
+        run: echo "No SVGs found; skipping publish step."
+
+      - name: Push pacman-contribution-graph.svg to the output branch
+        if: steps.collect.outputs.has_svgs == 'true'
+        uses: crazy-max/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output
+          build_dir: dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
