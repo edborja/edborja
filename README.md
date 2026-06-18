@@ -61,7 +61,8 @@
 ###
 
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=edborja&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15" alt="github trophies" />
+  <!-- Replaced broken "github-profile-trophy" image (returned 402) with GitHub Readme Stats card -->
+  <img src="https://github-readme-stats.vercel.app/api?username=edborja&theme=tokyonight&show_icons=true" alt="github stats" />
 </div>
 
 <br>
