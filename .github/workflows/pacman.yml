@@ -2,14 +2,24 @@
     uses: abozanona/pacman-contribution-graph@main
     with:
       github_user_name: ${{ github.repository_owner }}
-    # If the action supports an output dir option, add it here (the action typically writes to 'dist')
+
+  - name: Ensure dist dir and collect generated svgs
+    run: |
+      set -e
+      # create dist if missing
+      mkdir -p dist
+      # find any svg files generated anywhere in the workspace and copy them into dist
+      find . -type f -iname '*.svg' -maxdepth 4 -print -exec cp -f {} dist/ \; || true
+      echo "Copied any found SVGs into dist"
 
   - name: List generated files (debug)
     run: |
-      echo "Listing repo root"
-      ls -la
-      echo "Listing dist (if exists)"
-      if [ -d dist ]; then ls -la dist; else echo "dist not found"; fi
+      echo "Repo root listing:"
+      ls -la .
+      echo "dist listing:"
+      ls -la dist || true
+      echo "Files copied into dist (names):"
+      for f in dist/*; do echo "$f"; done || true
 
   - name: Push pacman-contribution-graph.svg to the output branch
     uses: crazy-max/ghaction-github-pages@v3.1.0
