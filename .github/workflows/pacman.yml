@@ -1,4 +1,4 @@
-    name: Generate pacman-contribution-graph.svg
+  - name: Generate pacman-contribution-graph.svg
     uses: abozanona/pacman-contribution-graph@main
     with:
       github_user_name: ${{ github.repository_owner }}
@@ -7,25 +7,32 @@
     name: Ensure dist dir and collect generated svgs
     run: |
       set -e
+      rm -rf dist
       mkdir -p dist
       found=false
       # find SVG files (limit depth) and copy into dist
-      while IFS= read -r -d '' f; do
+      if find . -maxdepth 6 -type f -iname '*.svg' -print0 | while IFS= read -r -d '' f; do
         echo "Found SVG: $f"
-        cp -f "$f" dist/ || true
+        cp -f "$f" dist/
         found=true
-      done < <(find . -maxdepth 6 -type f -iname '*.svg' -print0 || true)
-      echo "Copied any found SVGs into dist"
-      echo "has_svgs=$found" >> $GITHUB_OUTPUT
+      done; then
+        if [ -n "$(ls -A dist)" ]; then
+          echo "Copied SVGs into dist"
+          echo "has_svgs=true" >> $GITHUB_OUTPUT
+        else
+          echo "No SVG files found in dist after copy attempt"
+          echo "has_svgs=false" >> $GITHUB_OUTPUT
+        fi
+      fi
 
   - name: List generated files (debug)
     run: |
       echo "Repo root listing:"
       ls -la
       echo "dist listing:"
-      ls -la dist || true
-      echo "Files copied into dist (names):"
-      for f in dist/*; do echo "$f"; done || true
+      ls -la dist/ 2>/dev/null || echo "dist directory is empty or missing"
+      echo "SVG files in dist:"
+      find dist -type f -name '*.svg' 2>/dev/null | sort || echo "No SVG files found"
 
   - name: Skip publish if no svgs found
     if: steps.collect.outputs.has_svgs != 'true'
