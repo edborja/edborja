@@ -32,7 +32,7 @@
 
 ###
 
-<p align="left"><b>Lead Programmer & Full Stack Developer</b>
+<p align="left"><b>Lead Programmer & Full Stack Developer</b></p>
 
 ###
 
@@ -56,7 +56,7 @@
 
 ###
 
-<h3 align="left">🔥 My Stats :</h3>
+<h3 align="left">🏆 GitHub Achievements</h3>
 
 ###
 
@@ -64,7 +64,11 @@
   <img src="https://github-profile-trophy.vercel.app/?username=edborja&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15" alt="github trophies" />
 </div>
 
-<br>
+###
+
+<h3 align="left">🔥 My Stats :</h3>
+
+###
 
 <div align="center">
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=edborja&theme=tokyonight" height="180" alt="github summary card" />
@@ -83,5 +87,7 @@
     <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/edborja/edborja/output/pacman-contribution-graph.svg">
   </picture>
 </div>
+
+<p align="center"><em>💡 Tip: The pacman graph updates daily via GitHub Actions workflow</em></p>
 
 ###
