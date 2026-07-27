@@ -61,7 +61,7 @@
 ###
 
 <div align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=edborja&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15" alt="github trophies" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=edborja&layout=compact&theme=tokyonight" alt="top languages" />
 </div>
 
 ###
