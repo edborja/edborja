@@ -56,23 +56,12 @@
 
 ###
 
-<h3 align="left">🏆 GitHub Achievements</h3>
-
-###
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=edborja&layout=compact&theme=tokyonight" alt="top languages" />
-</div>
-
-###
-
 <h3 align="left">🔥 My Stats :</h3>
 
 ###
 
 <div align="center">
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=edborja&theme=tokyonight" height="180" alt="github summary card" />
-  <img src="https://streak-stats.demolab.com?user=edborja&locale=en&mode=daily&theme=tokyonight&hide_border=false&border_radius=5&order=3" height="180" alt="streak graph"  />
 </div>
 
 ###
